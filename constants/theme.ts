@@ -30,24 +30,24 @@ export const Colors = {
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
+    sans: 'Inter',
     /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
+    serif: 'Inter',
     /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
+    rounded: 'Inter',
     /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+    mono: 'Inter',
   },
   default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+    sans: 'Inter',
+    serif: 'Inter',
+    rounded: 'Inter',
+    mono: 'Inter',
   },
   web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    serif: "'Inter', Georgia, 'Times New Roman', serif",
+    rounded: "'Inter', 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
+    mono: "'Inter', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
