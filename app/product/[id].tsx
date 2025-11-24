@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -25,6 +26,7 @@ export default function ProductDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState<CoffeeSize>("medium");
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [imageModalVisible, setImageModalVisible] = useState(false);
 
   const normalizeSizes = (sizes: any, fallbackDefault: CoffeeSize = "medium") => {
     if (!sizes) {
@@ -148,11 +150,16 @@ export default function ProductDetailScreen() {
             </TouchableOpacity>
           </View>
 
-          <Image
-            source={{ uri: coffee.image }}
-            style={styles.image}
-            contentFit="cover"
-          />
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => setImageModalVisible(true)}
+          >
+            <Image
+              source={{ uri: coffee.image }}
+              style={styles.image}
+              contentFit="cover"
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.content}>
@@ -203,6 +210,28 @@ export default function ProductDetailScreen() {
           <Text style={styles.addToCartText}>Buy Now</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Full Screen Image Modal */}
+      <Modal
+        visible={imageModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setImageModalVisible(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setImageModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <Image
+              source={{ uri: coffee?.image }}
+              style={styles.modalImage}
+              contentFit="contain"
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 }
@@ -213,8 +242,8 @@ const styles = StyleSheet.create({
   scrollContent: { paddingBottom: 100 },
   imageContainer: { width, height: width, position: "relative" },
   image: {
-    width: "90%",
-    height: "50%",
+    width: "80%",
+    height: '60%',
     alignSelf: "center",
     marginTop: 150,
     borderRadius: 20,
@@ -303,4 +332,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addToCartText: { fontSize: 16, fontWeight: "700", color: "#fff" },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.95)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    width: width * 0.9,
+    height: width * 0.9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalImage: {
+    width: width * 0.6,
+    height: width * 0.4,
+    borderRadius: 20,
+  },
 });

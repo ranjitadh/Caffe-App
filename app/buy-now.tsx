@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     color: Colors.light.text,
   },
   discountCard: {
-    backgroundColor: "#FFF7F0",
+    backgroundColor: "#FFFFFF",
     borderRadius: 18,
     padding: 16,
     flexDirection: "row",
