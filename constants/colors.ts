@@ -3,7 +3,7 @@ const tintColorDark = "#C67C4E";
 
 export default {
   light: {
-    primary: "#ac5b28ff",
+    primary: "#D17842",
     primaryLight: "#FEEAE6",
     secondary: "#092E38",
     text: "#000000",
@@ -15,7 +15,7 @@ export default {
     card: "#FFFFFF",
   },
   dark: {
-    primary: "#C67C4E",
+    primary: "#D17842",
     primaryLight: "#2D2D2D",
     secondary: "#FFFFFF",
     text: "#FFFFFF",
