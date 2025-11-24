@@ -371,17 +371,20 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   bannerContainer: {
+    marginTop: 20,
     marginHorizontal: 20,
-    height: 140,
+    height: 160,
     borderRadius: 16,
-    overflow: 'hidden',
+    overflow: 'visible',
     position: 'relative',
     zIndex: 100,
     elevation: 10,
+    
   },
   bannerImage: {
     width: '100%',
     height: '100%',
+    borderRadius: 16,
   },
   bannerOverlay: {
     position: 'absolute',
