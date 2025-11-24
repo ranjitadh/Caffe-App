@@ -1,13 +1,36 @@
-import Colors from '@/constants/colors';
-import { Image } from 'expo-image';
-import { Stack, useRouter } from 'expo-router';
-import { Minus, Plus, Trash2 } from 'lucide-react-native';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useCart } from '../../contexts/CartContext'; // Corrected: From (tabs)/ to app/contexts/
+import Colors from "@/constants/colors";
+import { useCart } from "@/contexts/CartContext";
+import { Image } from "expo-image";
+import { Stack, useRouter } from "expo-router";
+import { Minus, Plus, Trash2 } from "lucide-react-native";
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function CartScreen() {
   const { cart, updateQuantity, removeFromCart, total, clearCart } = useCart();
   const router = useRouter();
+
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      return;
+    }
+
+    const [primaryItem] = cart;
+
+    router.push({
+      pathname: "/buy-now",
+      params: {
+        product: JSON.stringify(primaryItem.coffee),
+        size: primaryItem.size,
+      },
+    });
+  };
 
   if (cart.length === 0) {
     return (
@@ -24,7 +47,7 @@ export default function CartScreen() {
           <Text style={styles.emptyText}>Your cart is empty</Text>
           <TouchableOpacity 
             style={styles.shopButton}
-            onPress={() => router.push('/(tabs)/home')}
+            onPress={() => router.push("/(tabs)/home")}
           >
             <Text style={styles.shopButtonText}>Start Shopping</Text>
           </TouchableOpacity>
@@ -50,9 +73,12 @@ export default function CartScreen() {
         contentContainerStyle={styles.scrollContent}
       >
         {cart.map((item, index) => (
-          <View key={`${item.coffee.id}-${item.size}-${index}`} style={styles.cartItem}>
+          <View
+            key={`${item.coffee.id}-${item.size}-${index}`}
+            style={styles.cartItem}
+          >
             <Image
-              source={item.coffee.image}
+              source={{ uri: item.coffee.image }}
               style={styles.itemImage}
               contentFit="cover"
             />
@@ -60,8 +86,12 @@ export default function CartScreen() {
             <View style={styles.itemDetails}>
               <View style={styles.itemHeader}>
                 <View style={styles.itemInfo}>
-                  <Text style={styles.itemName}>{item.coffee.name}</Text>
-                  <Text style={styles.itemDescription}>{item.coffee.description}</Text>
+                  <Text style={styles.itemName}>
+                    {item.coffee.title ?? item.coffee.name}
+                  </Text>
+                  <Text style={styles.itemDescription}>
+                    {item.coffee.description ?? "Freshly brewed coffee."}
+                  </Text>
                   <Text style={styles.itemSize}>Size: {item.size}</Text>
                 </View>
                 
@@ -74,7 +104,9 @@ export default function CartScreen() {
               </View>
               
               <View style={styles.itemFooter}>
-                <Text style={styles.itemPrice}>$ {(item.price * item.quantity).toFixed(2)}</Text>
+                <Text style={styles.itemPrice}>
+                  $ {(item.price * item.quantity).toFixed(2)}
+                </Text>
                 
                 <View style={styles.quantityContainer}>
                   <TouchableOpacity
@@ -114,14 +146,7 @@ export default function CartScreen() {
       
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={() => {
-            try {
-              router.push('/product/buy-now'); // Full path: Since buy-now is in /product/
-              console.log('Navigating to buy-now');
-            } catch (error) {
-              console.error('Navigation error:', error);
-            }
-          }}
+          onPress={handleCheckout}
         >
           <Text style={styles.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>

@@ -3,11 +3,11 @@ import { useCart } from "@/contexts/CartContext";
 import { Tabs } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import NotificationIcon from "./notifications";
+import { NotificationIcon } from "./notifications";
 
 // Correct lucide icons
 import { Home, ShoppingBag } from "lucide-react-native";
-import HeartIcon from "./wishlist";
+import { HeartIcon } from "./wishlist";
 
 export default function TabLayout() {
   const { itemCount } = useCart();
