@@ -1,18 +1,26 @@
-export type CoffeeSize = 'Small' | 'Medium' | 'Large';
+export type CoffeeSize = "small" | "medium" | "large";
+
+type CoffeeSizeOption = {
+  size: string;
+  price: number;
+};
+
+export type CoffeeSizes =
+  | Record<string, number>
+  | CoffeeSizeOption[];
 
 export interface Coffee {
-  id: string;
-  name: string;
-  description: string;
+  id: string | number;
+  title?: string;
+  name?: string;
+  description?: string;
   price: number;
   image: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  sizes: {
-    size: CoffeeSize;
-    price: number;
-  }[];
+  category?: string;
+  category_id?: string | number;
+  rating?: number;
+  reviews?: number;
+  sizes: CoffeeSizes;
 }
 
 export interface CartItem {
@@ -23,7 +31,10 @@ export interface CartItem {
 }
 
 export interface Category {
-  id: string;
-  name: string;
-  icon: string;
+  id: string | number;
+  title?: string;
+  name?: string;
+  icon?: string;
 }
+
+export type DeliveryMethod = "Deliver" | "Pickup";
